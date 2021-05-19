@@ -1,0 +1,36 @@
+.sliding {
+  animation-name: slide;
+  animation-duration: 1s;
+}
+
+@keyframes slide {
+  0% {
+    left: 200px;
+    top: 0px;
+  }
+  50% {
+    left: 0px;
+    top: 100px;
+  }
+  100% {
+    left: 200px;
+  }
+}
+
+.flexx {
+  display: flex;
+  background: rebeccapurple;
+
+  list-style-type: none;
+}
+
+.listItem :hover {
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+  margin: "30px";
+}
+
+.card {
+  /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
+  margin: 10px, 0px;
+  text-decoration-style: none;
+}

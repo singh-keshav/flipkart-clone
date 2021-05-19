@@ -1,0 +1,28 @@
+.a {
+  margin: 10px;
+  display: flex;
+}
+
+.aa {
+  padding: 10px;
+  flex-basis: 700px;
+}
+.ab {
+  padding: 10px;
+  flex-basis: 300px;
+}
+
+.aaa {
+  margin: 10px 30px 10px 40px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  display: flex;
+}
+
+.aaaa{
+    height: 100px;
+    flex-basis: 100px;
+    padding:20px;
+}
+.aaab{
+    flex-basis: 400px;
+}
