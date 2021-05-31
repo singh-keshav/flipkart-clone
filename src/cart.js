@@ -11,7 +11,7 @@ const CartItem = (props) => {
   return (
     <div className={style.aaa}>
       <div className={style.aaaa}>
-        <img src={productImg} alt="product" width="100" height="100" />
+        <img src={productImg} alt="product" width="100%" height="100%" />
       </div>
       <div className={style.aaab}>
         <h1>{product.pName}</h1>

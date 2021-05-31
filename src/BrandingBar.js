@@ -2,7 +2,8 @@ import react from "react";
 import { connect } from "react-redux";
 import { Route, Switch, Link, useHistory, Redirect } from "react-router-dom";
 
-import cartImg from "./images/cart.svg";
+
+import styles from "./brandingBar.module.css";
 
 const BrandingBar = (props) => {
   const history = useHistory();
@@ -17,47 +18,55 @@ const BrandingBar = (props) => {
   }
 
   return (
-    //brand
-    //search box
-    //loginbutton
-    //cart icon and number over it
     <div
       style={{
         display: "flex",
         backgroundColor: "blue",
         color: "white",
-        height: "50px",
+        width:"100vw",
+        position:"relative"
       }}
     >
-      <p onClick={redirectToHome}>Flipkart</p>
-      <input placeholder="search for products brands and more" />
-      <button onClick={handleClick}>login</button>
-      <p>more</p>
-      <p style={{ position: "relative" }}>
-        <Link to="/user/cart">
-          <img src={cartImg} alt="cart" height="30" width="30" />
-        
-        <div
-          style={{
-            position: "relative",
-            top: "-40px",
-            left: "21px",
-            borderRadius: "50%",
-            backgroundColor: "red",
-            height: "20px",
-            width: "20px",
-          }}
-        >
-          <span style={{}}>{props.items.length}</span>
+      <div className={styles.sideEmptyDiv}></div>
+      <div className={styles.middleDiv}>
+        <div className={styles.flipkarConatianer}>
+          <p onClick={redirectToHome}>Flipkart</p>
         </div>
-        {/* <p>cart</p> */}
-        </Link>
-        
-      </p>
 
-      {/* <Route path="/login">
-        <p>dfjdofjdfjdfjdjfo</p>
-      </Route> */}
+        <div className={styles.searchContainer}>
+          <form>
+            <input placeholder="search for products brands and more" />
+            <div className={styles.searchIcon}>
+              <span
+                className="material-icons"
+                onClick={() => console.log("icon working")}
+              >
+                search
+              </span>
+            </div>
+          </form>
+        </div>
+        <button className={styles.whiteButton} onClick={handleClick}>login</button>
+        <div className={styles.more}>
+          <p onClick={handleClick}>More</p>
+          <div className={styles.downArrow}>
+            <span className="material-icons">keyboard_arrow_down</span>
+          </div>
+        </div>
+        {/* <div className={styles.loginContainer}>
+          
+        </div> */}
+
+        <div>
+          <Link to="/user/cart" className={styles.cartContainer}>
+            <span className="material-icons">shopping_cart</span>
+            <p>cart</p>
+            {/* <p>cart</p> */}
+          </Link>
+        </div>
+      </div>
+
+      <div className={styles.sideEmptyDiv}></div>
     </div>
   );
 };

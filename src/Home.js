@@ -1,6 +1,6 @@
 import react, { useState, useEffect } from "react";
 import { Link, Route } from "react-router-dom";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import BrandingBar from "./BrandingBar";
 import styles from "./home.module.css";
 
@@ -10,53 +10,89 @@ import ProductPage from "./ProductPage";
 
 let images = [
   "https://rukminim1.flixcart.com/flap/844/140/image/b91ea107802e99c5.jpg?q=50",
-  "https://rukminim1.flixcart.com/flap/50/50/image/ed5a19a069128a09.jpg?q=50",
-  "https://rukminim1.flixcart.com/flap/50/50/image/143f6335746dc85a.jpg?q=50",
+  "https://rukminim1.flixcart.com/flap/844/140/image/5ee97c702bfe8ec4.jpg?q=50",
 ];
 
 const Tile = (props) => {
   console.log(props);
-  const products=props.products;
+  const products = props.products;
   console.log(products);
   const categoryProducts = products.filter((p) => p.pCategoryId === props.id);
   const categoryName = categoryProducts[0].pCategory;
   const links = categoryProducts.map((p) => {
     return (
-      <li>
-        <Link className={styles.listItems} to={`/products/${p.pId}`}>
+      <li key={p.pId} style={{flex:"auto"}} className={styles.listItem}>
+        <Link  to={`/products/${p.pId}`}  >
           <img
             src={img}
             alt="product"
-            height="200"
-            width="200"
+            // height="200"
+            // width="200"
             // style={{ margin: "5px" }}
-            className={styles.listItem}
+            className={styles.imageShadow}
+            
           />
         </Link>
+        <p>{p.pName}</p>
       </li>
     );
   });
+
+  const [divPosition, setDivPosition] = useState("translate3d(0px, 0px, 0px)");
+
+  let divPositionValue = 0;
+  let direction = "right";
+
+  const slidingbutton = (direction) => {
+    return <div><button onClick={slidButtonUtility}>right</button></div>;
+  };
+
+  const slidButtonUtility = () => {
+    if (direction === "right") {
+      if (divPositionValue > -450) {
+        divPositionValue = divPositionValue - 450;
+        setDivPosition(`translate3d(${divPositionValue}px, 0px, 0px)`);
+      } else {
+        direction = "left";
+      }
+    } else {
+      if (divPositionValue < 450) {
+        divPositionValue = divPositionValue + 450;
+        setDivPosition(`translate3d(${divPositionValue}px, 0px, 0px)`);
+      } else {
+        direction = "right";
+      }
+    }
+  };
   return (
     <div className={styles.card}>
-      <div style={{ textAlign: "left" }}>
+      <div style={{ textAlign: "left", padding: "20px 15px" }}>
         <h1>{categoryName} </h1>
-        <p>something</p>
+        <p style={{ color: "#949494" }}>something</p>
       </div>
       <hr />
-      <ul className={styles.flexx}>{links}</ul>
+      <div
+        className={styles.gallaryContainer}
+        style={{ transform: divPosition }}
+      >
+        <ul className={styles.flexx}>{links}</ul>
+        {/* {slidingbutton()} */}
+      </div>
+      
     </div>
+    
   );
 };
 
 const Home = (props) => {
   const [count, setCount] = useState(0);
 
-  const products=props.state.products;
+  const products = props.state.products;
 
   const tiles = [];
   const tilesGenerator = () => {
     for (let i = 0; i < 6; i++) {
-      tiles.push(<Tile id={i} key={i} products={products}/>);
+      tiles.push(<Tile id={i} key={i} products={products} />);
     }
     return tiles;
   };
@@ -64,7 +100,7 @@ const Home = (props) => {
   useEffect(() => {
     console.log("inside useeffect");
     const id = setInterval(() => {
-      setCount((count + 1) % 3);
+      setCount((count + 1) % 2);
     }, 5000);
     return () => {
       clearInterval(id);
@@ -82,7 +118,7 @@ const Home = (props) => {
         src={currentImg}
         alt="sliding images"
         hight="300"
-        width="1300"
+        width="100%"
         className={styles.sliding}
       />
       <div>{tilesGenerator()}</div>
@@ -99,11 +135,10 @@ const Home = (props) => {
 
 // export default Home;
 
-
 const mapStateToProps = (state) => {
-  console.log(state)
+  console.log(state);
   return {
-    state
+    state,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -112,4 +147,3 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-

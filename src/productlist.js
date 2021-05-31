@@ -1,15 +1,15 @@
 const products = [];
 const category = [
-  "electronics",
-  "clothings",
-  "men",
-  "women",
-  "home&furniture",
-  "flights",
+  "Electronics",
+  "Clothings",
+  "Men",
+  "Women",
+  "Home&furniture",
+  "Flights",
 ];
 
 for (let i = 0; i < 6; i++) {
-  for (let j = 0; j < 10; j++) {
+  for (let j = 0; j < 6; j++) {
     let product = {
       pId: Math.floor(Math.random() * 1000000),
       pName: Math.random().toString(36).substr(2, 5),
